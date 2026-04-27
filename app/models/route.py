@@ -16,6 +16,6 @@ class route(Base):
 
     agent_id = Column(Integer, ForeignKey("users.id"), nullable=True)
 
-    status = Column(enumerate(RouteStatus), nullable=False, default=RouteStatus.pending)
+    status = Column(Enum(RouteStatus), nullable=False, default=RouteStatus.in_progress)
 
     generated_at = Column(DateTime(timezone=True), server_default=func.now())

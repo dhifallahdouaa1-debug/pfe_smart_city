@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,String,Boolean,DateTime
+from sqlalchemy import Column,Integer,String,Boolean,DateTime,Enum
 from app.core.database import Base 
 import enum
 from sqlalchemy.sql import func
@@ -7,7 +7,7 @@ class UserRole(str, enum.Enum):
     agent   = "agent"
     citizen = "citizen"
 class User(Base):
-    __tablename__="user"
+    __tablename__="users"
     
     id=Column(Integer,primary_key=True,index=True)
     
@@ -17,7 +17,7 @@ class User(Base):
     
     hashed_password=Column(String(255),nullable=False)
     
-    role=Column(enumerate(UserRole),nullable=False,default=UserRole.citizen)
+    role=Column(Enum(UserRole),nullable=False,default=UserRole.citizen)
     
     is_active=Column(Boolean,default=True)
 

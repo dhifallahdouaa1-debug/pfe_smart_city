@@ -7,22 +7,22 @@ class ReportStatus(str, enum.Enum):
     in_progress = "in_progress"
     resolved   = "resolved"
 
-class Repport(Base):
+class Report(Base):
     __tablename__="reports"
     
     id=Column(Integer,primary_key=True,index=True)
 
     citizen_id=Column(Integer, ForeignKey("users.id"),nullable=False)
 
-    audio_path=Column(String(100),nullable=True)
+    audio_path=Column(String(255),nullable=True)
 
     latitude=Column(Float, nullable=False)
     
     longitude =Column(Float, nullable=False)
 
-    address_text =Column(String, nullable=True)
+    address_text =Column(String(255), nullable=True)
 
-    status=Column(enum(ReportStatus), nullable=False, default=ReportStatus.pending)
+    status=Column(Enum(ReportStatus), nullable=False, default=ReportStatus.pending)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
